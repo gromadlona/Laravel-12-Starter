@@ -46,19 +46,73 @@
 
                 <div class="w-full flex-1 px-4 py-3">
                     @yield('content')
+
+                    {{ $slot ?? '' }}
                 </div>
             </div>
             <div class="drawer-side border-r-2 border-r-slate-200">
                 <label for="sidebar" aria-label="close sidebar" class="drawer-overlay"></label>
-                <ul class="menu bg-base-200 text-base-content min-h-full w-full md:w-[40vh] lg:w-[30vh] p-4">
-                    <!-- Sidebar content here -->
-                    <li><a>Sidebar Item 1</a></li>
-                    <li><a>Sidebar Item 2</a></li>
-                </ul>
 
-                <label for="sidebar" class="btn btn-primary drawer-button lg:hidden">
-                    Open drawer
-                </label>
+                <div class="flex flex-col min-h-screen bg-base-200 w-72 lg:w-72 px-2 pt-0 pb-3">
+                    <div class="w-full flex items-center justify-between px-4 p-3 pb-3 border-b-1 border-slate-300">
+                        <a href="{{ route('dashboard') }}"
+                            class="flex items-center justify-start gap-x-4 cursor-pointer">
+                            <img src="{{ asset('img/logo.png') }}"
+                                class="max-h-12 lg:max-h-16 border border-slate-300 rounded-lg"
+                                alt="{{ env('APP_NAME', 'Laravel') }}">
+                        </a>
+
+                        <label for="sidebar" class="btn btn-square btn-ghost drawer-button lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                class="inline-block h-5 w-5 stroke-current">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </label>
+                    </div>
+
+                    <ul class="menu text-base-content w-full gap-1">
+                        <li>
+                            <a href="dashboard" wire:current="menu-active">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <details>
+                                <summary>Parent</summary>
+                                <ul>
+                                    <li><a>Submenu 1</a></li>
+                                    <li><a>Submenu 2</a></li>
+                                    <li>
+                                        <details>
+                                            <summary>Parent</summary>
+                                            <ul>
+                                                <li><a>Submenu 1</a></li>
+                                                <li><a>Submenu 2</a></li>
+                                            </ul>
+                                        </details>
+                                    </li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li>
+                            <a href="{{ route('test') }}" wire:current="menu-active" wire:navigate>
+                                Test
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('awok') }}" wire:current="menu-active" wire:navigate>
+                                Awok
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('dashboard') }}" wire:current="menu-active" wire:navigate>
+                                Item 3
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </main>
