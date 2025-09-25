@@ -21,7 +21,28 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('admin123'),
                 'roles' => ['MeGGi'],
                 'nama_creator' => 'Generated'
-            ]
+            ],
+            [
+                'name' => 'Test',
+                'email' => 'test@mail.com',
+                'password' => Hash::make('test1234'),
+                'roles' => ['Administrator'],
+                'nama_creator' => 'Generated'
+            ],
+            [
+                'name' => 'Skpd',
+                'email' => 'skpd@mail.com',
+                'password' => Hash::make('test1234'),
+                'roles' => ['Operator'],
+                'nama_creator' => 'Generated'
+            ],
+            [
+                'name' => 'other',
+                'email' => 'other@mail.com',
+                'password' => Hash::make('test1234'),
+                'roles' => ['Operator'],
+                'nama_creator' => 'Generated'
+            ],
         ];
 
         try {

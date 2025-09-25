@@ -73,15 +73,20 @@
 
                     <ul class="menu text-base-content w-full gap-1">
                         <li>
-                            <a href="dashboard" wire:current="menu-active">
+                            <a href="{{ route('dashboard') }}" wire:current="menu-active" wire:navigate>
                                 Dashboard
                             </a>
                         </li>
                         <li>
-                            <details>
-                                <summary>Parent</summary>
-                                <ul>
-                                    <li><a>Submenu 1</a></li>
+                            <details {{ request()->is('master-data/*') ? 'open' : '' }}>
+                                <summary class="{{ request()->is('master-data/*') ? 'bg-neutral text-white' : '' }}">
+                                    Master Data</summary>
+                                <ul class="mt-1">
+                                    <li>
+                                        <a href="{{ route('pengguna') }}" wire:current="menu-active" wire:navigate>
+                                            Akun Pengguna
+                                        </a>
+                                    </li>
                                     <li><a>Submenu 2</a></li>
                                     <li>
                                         <details>
@@ -105,13 +110,25 @@
                                 Awok
                             </a>
                         </li>
-
-                        <li>
-                            <a href="{{ route('dashboard') }}" wire:current="menu-active" wire:navigate>
-                                Item 3
-                            </a>
-                        </li>
                     </ul>
+
+                    <div class="border-t border-slate-300 p-3 mt-auto flex flex-col gap-2">
+                        <div class="flex items-center gap-3">
+                            <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}"
+                                alt="avatar" class="w-10 h-10 rounded-full border border-slate-300" />
+
+                            <div class="flex flex-col">
+                                <span class="font-semibold text-sm">{{ auth()->user()->name }}</span>
+                                <span class="text-xs text-slate-500">{{ auth()->user()->email }}</span>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <form method="POST" action="{{ route('logout') }}" class="inline">
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-neutral w-full">Logout</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

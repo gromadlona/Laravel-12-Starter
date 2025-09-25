@@ -11,3 +11,14 @@
 @theme {
     --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
+
+/* Adds pointer cursor to buttons */
+@layer base {
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor: pointer;
+    }
+}
+
+/* Defaults hover styles on all devices */
+@custom-variant hover (&:hover);
