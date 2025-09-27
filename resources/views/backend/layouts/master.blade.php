@@ -12,7 +12,7 @@
 </head>
 
 <body class="font-sans antialiased min-h-screen flex flex-col bg-base-200 text-base-content">
-    <main class="w-full">
+    <main class="w-full" id="main-content">
         <div class="drawer lg:drawer-open">
             <input id="sidebar" type="checkbox" class="drawer-toggle" />
             <div class="drawer-content w-full h-screen flex flex-col">
@@ -136,6 +136,43 @@
 
     @livewireScripts
     @stack('scripts')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // console.log("DOM siap");
+        });
+    </script>
+
+    <script>
+        document.addEventListener('livewire:init', () => {
+            // console.log("Livewire siap");
+            const mainContent = document.getElementById('main-content');
+
+            // Event Listener Click
+            mainContent.addEventListener('click', (e) => {
+
+                // Delete Btn
+                if (e.target.closest('.delete-btn')) { // aman walau ada <i> di dalam button
+                    const uuid = e.target.closest('.delete-btn').dataset.uuid;
+                    const compTarget = e.target.closest('.delete-btn').dataset.target;
+
+                    deleteSwal(() => {
+                        Livewire.dispatchTo(compTarget, 'doDelete', {
+                            uuid
+                        });
+                    });
+                }
+            });
+
+            // Toast
+            Livewire.on('toast', (event) => {
+                Toast.fire({
+                    icon: event.type || "question",
+                    title: event.message || "Aksi Berhasil di-Lakukan !"
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

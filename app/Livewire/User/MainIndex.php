@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Attributes\Locked;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Role;
@@ -180,17 +181,16 @@ class MainIndex extends Component
         }
     }
 
+    #[On('doDelete')]
     public function doDelete($uuid)
     {
         DB::beginTransaction();
-
         try {
             $data = User::where('uuid', '=', $uuid)->firstOrFail();
             $delete = $data->delete();
 
             DB::commit();
             (new MainHelper)->doAlert(2, 'Data Penggguna di-Hapus !');
-
 
             if ($this->form && $this->editData->uuid === $uuid) {
                 $this->showForm(false, false);

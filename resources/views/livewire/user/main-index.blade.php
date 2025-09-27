@@ -246,9 +246,9 @@
                                     Edit Data
                                 </button>
                                 <button type="button" popovertarget="popover-{{ $loop->iteration }}"
-                                    class="btn btn-xs btn-outline w-full font-normal tracking-wider"
-                                    popovertarget="popover-{{ $loop->iteration }}"
-                                    wire:click="doDelete('{{ $item->uuid }}')">
+                                    class="btn btn-xs btn-outline w-full font-normal tracking-wider delete-btn"
+                                    popovertarget="popover-{{ $loop->iteration }}" data-uuid="{{ $item->uuid }}"
+                                    data-target="user.main-index">
                                     Hapus Data
                                 </button>
                             </div>
