@@ -14,7 +14,6 @@ window.deleteSwal = (event) => {
         confirmButtonText: "Ya, Hapus Data!",
         cancelButtonText: "Batalkan Aksi",
     }).then((result) => {
-        console.log("OK");
         if (result.isConfirmed) {
             event && event();
         }
